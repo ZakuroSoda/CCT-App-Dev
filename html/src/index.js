@@ -13,7 +13,7 @@ let yCoordinate = (canvas.height / 2) - (centerPointHeight / 2);
 
 function movePaddleRight(){
     //Check for border collision
-    if (xCoordinate+50 >= 800){
+    if (xCoordinate+50 >= 750){
       ;
     }
     else {
@@ -24,13 +24,33 @@ function movePaddleRight(){
 }
 function movePaddleLeft(){
   //Check for border collision
-  if (xCoordinate-50 <= -50){
+  if (xCoordinate-50 <= 0){
     ;
   }
   else {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(xCoordinate-50,yCoordinate,centerPointWidth,centerPointHeight);
       xCoordinate -= 50;
+  }
+}
+function movePaddleUp(){
+  if (yCoordinate-50 <= 0){
+    ;
+  }
+  else {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(xCoordinate,yCoordinate-50,centerPointWidth,centerPointHeight);
+    yCoordinate -= 50;
+  }
+}
+function movePaddleDown(){
+  if (yCoordinate+50 >= 450){
+    ;
+  }
+  else {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(xCoordinate,yCoordinate+50,centerPointWidth,centerPointHeight);
+    yCoordinate += 50;
   }
 }
 
@@ -43,4 +63,14 @@ document.addEventListener("keypress", function(event) {
     if (event.code == "KeyA") {
       movePaddleLeft();
     }
+}, true);
+document.addEventListener("keypress", function(event) {
+  if (event.code == "KeyW") {
+    movePaddleUp();
+  }
+}, true);
+document.addEventListener("keypress", function(event) {
+  if (event.code == "KeyS") {
+    movePaddleDown();
+  }
 }, true);
