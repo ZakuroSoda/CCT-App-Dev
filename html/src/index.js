@@ -14,20 +14,35 @@ var xCoordinate = (canvas.width / 2) - (centerPointWidth / 2);
 var yCoordinate = (canvas.height / 2) - (centerPointHeight / 2);
 
 
-function randomRange(min, max) {
+function randomRange(min, max){
   return Math.floor((Math.random() * (max - min + 1)) + min);
 }
-function spawnFruit(){
+function spawnFruit(x,y){
   ctx.fillStyle = '#00FF00';
-  var xCoordinateFruit = randomRange(0,770);
-  var yCoordinateFruit = randomRange(0,470);
+  if (x != undefined){
+    var xCoordinateFruit = x;
+  } else{
+    var xCoordinateFruit = randomRange(0,770);
+  }
+  if (y != undefined){
+    var yCoordinateFruit = y;
+  } else{
+    var yCoordinateFruit = randomRange(0,470);
+  }
   ctx.fillRect(xCoordinateFruit,yCoordinateFruit,30,30);
+  ctx.fillStyle = '#000000';
+  return {
+    'xCoordinateFruit': xCoordinateFruit,
+    'yCoordinateFruit': yCoordinateFruit
+  };
 }
-spawnFruit()
-ctx.fillStyle = '#F000000';
+fruitCoordinates = spawnFruit();
+function checkEat(playerX, playerY){
+  ; //in progress
+}
 function updateScore(score){
     if (score == undefined){
-      console.log("fk u cheater");
+      console.log("error");
     }
     else {
       document.getElementById("score").innerHTML = "Score: " + score;
