@@ -56,6 +56,7 @@ function checkEat(playerX, playerY){
   ){
     score += 1;
     updateScore(score)
+    fruitCoordinates = spawnFruit();
   }
 }
 function movePaddleRight(){
