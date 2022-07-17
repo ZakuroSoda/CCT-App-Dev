@@ -17,6 +17,15 @@ var yCoordinate = (canvas.height / 2) - (centerPointHeight / 2);
 function randomRange(min, max){
   return Math.floor((Math.random() * (max - min + 1)) + min);
 }
+function updateScore(score){
+  if (score == undefined){
+    console.log("error");
+  }
+  else {
+    document.getElementById("score").innerHTML = "Score: " + score;
+  }
+}
+updateScore(score);
 function spawnFruit(x,y){
   ctx.fillStyle = '#00FF00';
   if (x != undefined){
@@ -38,15 +47,16 @@ function spawnFruit(x,y){
 }
 fruitCoordinates = spawnFruit();
 function checkEat(playerX, playerY){
-  ; //in progress
-}
-function updateScore(score){
-    if (score == undefined){
-      console.log("error");
-    }
-    else {
-      document.getElementById("score").innerHTML = "Score: " + score;
-    }
+  //thanks to https://youtu.be/_MyPLZSGS3s
+  if (
+    playerX + 50 >= fruitCoordinates.xCoordinateFruit &&
+    playerX <= fruitCoordinates.xCoordinateFruit + 30 &&
+    playerY + 50 >= fruitCoordinates.yCoordinateFruit &&
+    playerY <= fruitCoordinates.yCoordinateFruit + 30
+  ){
+    score += 1;
+    updateScore(score)
+  }
 }
 function movePaddleRight(){
     //Check for border collision
@@ -57,8 +67,7 @@ function movePaddleRight(){
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.fillRect(xCoordinate+50,yCoordinate,centerPointWidth,centerPointHeight);
       xCoordinate += 50;
-      score += 1;
-      updateScore(score);
+      checkEat(xCoordinate,yCoordinate);
     }
 }
 function movePaddleLeft(){
@@ -70,8 +79,7 @@ function movePaddleLeft(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(xCoordinate-50,yCoordinate,centerPointWidth,centerPointHeight);
     xCoordinate -= 50;
-    score += 1;
-    updateScore(score);
+    checkEat(xCoordinate,yCoordinate);
   }
 }
 function movePaddleUp(){
@@ -82,8 +90,7 @@ function movePaddleUp(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(xCoordinate,yCoordinate-50,centerPointWidth,centerPointHeight);
     yCoordinate -= 50;
-    score += 1;
-    updateScore(score);
+    checkEat(xCoordinate,yCoordinate);
   }
 }
 function movePaddleDown(){
@@ -94,29 +101,32 @@ function movePaddleDown(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillRect(xCoordinate,yCoordinate+50,centerPointWidth,centerPointHeight);
     yCoordinate += 50;
-    score += 1;
-    updateScore(score);
+    checkEat(xCoordinate,yCoordinate);
   }
 }
 function controls(){
   document.addEventListener("keypress", function(event) {
     if (event.code == "KeyD" || event.keycode == "ArrowRight") {
       movePaddleRight();
+      spawnFruit(fruitCoordinates.xCoordinateFruit, fruitCoordinates.yCoordinateFruit);
     }
   }, true);
   document.addEventListener("keypress", function(event) {
       if (event.code == "KeyA" || event.code == "ArrowLeft") {
         movePaddleLeft();
+        spawnFruit(fruitCoordinates.xCoordinateFruit, fruitCoordinates.yCoordinateFruit);
       }
   }, true);
   document.addEventListener("keypress", function(event) {
     if (event.code == "KeyW" || event.code == "ArrowUp") {
       movePaddleUp();
+      spawnFruit(fruitCoordinates.xCoordinateFruit, fruitCoordinates.yCoordinateFruit);
     }
   }, true);
   document.addEventListener("keypress", function(event) {
     if (event.code == "KeyS" || event.code == "ArrowDown") {
       movePaddleDown();
+      spawnFruit(fruitCoordinates.xCoordinateFruit, fruitCoordinates.yCoordinateFruit);
     }
   }, true);
 }
