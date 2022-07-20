@@ -1,5 +1,5 @@
 // width="800px" height="500px"
-//Setup
+// Setup
 var canvas = document.getElementById("gameScreen");
 var ctx = canvas.getContext("2d");
 
