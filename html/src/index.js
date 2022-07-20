@@ -108,7 +108,7 @@ function checkBomb(playerX, playerY, player){
       if (scorePlayer1 <= 0){
         ;
       } else {
-        score -= 1;
+        scorePlayer1 -= 1;
       }
       updateScore(scorePlayer1,1);
     }
@@ -116,7 +116,7 @@ function checkBomb(playerX, playerY, player){
       if (scorePlayer2 <= 0){
         ;
       } else {
-        score -= 1;
+        scorePlayer2 -= 1;
       }
       updateScore(scorePlayer2,2);
     }
