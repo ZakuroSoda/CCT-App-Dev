@@ -10,6 +10,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Itim&family=Major+Mono+Display&family=Roboto+Mono&display=swap" rel="stylesheet">
 
     <style>
+        .blink {
+            animation: blinker 1s infinite;
+            font-family: 'Itim', cursive;
+            font-family: 'Major Mono Display', monospace;
+            font-family: 'Roboto Mono', monospace;
+            text-align: center;
+            display: inline;
+            font-size: 69px;
+            margin: 0;
+            position: absolute;
+            top: 58%;
+            left: 50%;
+            -ms-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            visibility: hidden;
+        }
+        
+        @keyframes blinker {
+            from { opacity: 1.0; }
+            50% { opacity: 0.25; }
+            to { opacity: 1.0; }
+        }
         .center {
             margin: 0;
             position: absolute;
@@ -18,13 +40,20 @@
             -ms-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
         }
-        #score {
+        h1 {
             
             font-family: 'Itim', cursive;
             font-family: 'Major Mono Display', monospace;
             font-family: 'Roboto Mono', monospace;
             text-align: center;
+            display: inline;
 
+        }
+        #scoreP1 {
+            color: #407017;
+        }
+        #scoreP2 {
+            color: #175c70;
         }
         #gameScreen {
             border: 5px solid rebeccapurple 
@@ -42,7 +71,10 @@
             display: grid;
             height: 100vh;
         }
-
+        .header {
+            display: flex;
+            justify-content:center;
+        }
         .base-timer {
             position: relative;
             width: 100px;
@@ -99,7 +131,21 @@
 </head>
 <body>
     <div id="app"></div>
-    <h1 id="score">Score:</h1><br>
+    <div class="header">
+    <h1 id="scoreP1">P1 Score: 32</h1>
+    <h1>&nbsp;</h1>
+    <h1 id="scoreP2">P2 Score: 69</h1>
+    </div>
+    <br>
+    <span class="blink" id="winP1">
+        PLAYER 1 WON!
+    </span>
+    <span class="blink" id="winP2">
+        PLAYER 2 WON!
+    </span>
+    <span class="blink" id="wintie">
+        CLOSE MATCH!<br>A TIE!
+    </span>
     <canvas class="center" id="gameScreen" width="800px" height="500px"></canvas>
     <script src="src/index.js"></script>
 </body>
